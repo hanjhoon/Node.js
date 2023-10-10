@@ -35,13 +35,51 @@ Node.js 코드를 수행하는 스레드와 이벤트 루프의 스레드는 동
 
 
 
-### 스택과 큐 자료구조
-콜 스택(Call Stack)이란?
-콜 스택이란, 자바스크립트 코드가 실행되며 생성되는 실행 컨텍스트(Execution Context)를 저장하는 자료구조라 정의 할 수 있다.
+### 콜 스택(Call Stack)이란?
++ 콜 스택이란, 자바스크립트 코드가 실행되며 생성되는 실행 컨텍스트(Execution Context)를 저장하는 자료구조라 정의 할 수 있다.
 
 1. 함수를 호출하면 실행 컨텍스트가 생성되고, 이를 콜 스택에 추가한 다음 함수를 수행하기 시작
 2. 함수에 의해 호출되는 모든 함수(내부 함수들)는 콜 스택에 추가되고 해당 위치에서 실행
 3. 함수의 실행이 종료되면 해당 실행 컨텍스트를 콜 스택에서 제거한 후 중단 된 시점부터 다시 시작
 4. 만약 스택이 할당 된 공간보다 많은 공간을 차지하면 'stack overflow'에러가 발생
+
+
+### 브라우저 환경에서의 자바스크립트
+![image](https://github.com/hanjhoon/Node.js/assets/121271030/050623ce-f0c5-4eff-9017-4111d1d936d8)
+
++ Heap
+힙은 구조화되지 않은 넓은 메모리 영역을 지칭합니다.
+이전에 알아본 자바스크립트의 Reference Type 즉, 객체는 모두 Heap안에 할당됩니다.
+
++ Web API
+브라우저에서 제공하는 별도의 API 입니다.
+프론트엔드 개발을 하며 주로 사용하는 DOM, SVG, Fetch, Canvas, setTimeOut등은 모두 자바스크립트가 아닌 브라우저에서 제공하는 API입니다.
+
++ Callback Queue(Messege Queue)
+비동기 함수가 실행 된 후 콜백 함수가 대기하는 자료구조 입니다.
+
++ Microtask Queue(Job Queue)
+ES6에서 도입 된 새로운 컨셉으로, Callback Queue와 동일 계층에 존재하며 Promise를 통한 비동기 요청 시의 콜백 함수는 Microtask Queue에 대기하게 됩니다.
+
++ Animation Frames
+requestAnimationFrame에 의해 등록되는 자료구조로 requestAnimationFrame의 콜백 함수가 대기하는 자료구조 입니다.
+
++ Event loop(이벤트 루프)
+이벤트 루프는 Call Stack과 각 Queue를 감시하고 있다가 Call Stack이 비었을 경우 정해진 우선순위에 따라 queue에서 하나씩 꺼내 Call Stack에 추가해주는 역할을 합니다.
+
+1. 호출 스택의 작업을 모두 처리합니다.
+2. 호출스택이 비었을 경우, Microtask Queue를 확인하고 처리해야 할 작업이 있다면 Call Stack에 넣고 처리합니다.
+3. 만약 MicroTask Queue가 비었을 경우에는 Animation Frames를 확인하고 마찬가지로 처리해야 할 작업이 있다면 Call Stack에 넣고 처리합니다.
+4. 1~3과정을 거치고 난 후 마지막으로 Callback Queue를 확인하고 마찬가지로 Call Stack에 넣고 처리합니다.
+
+
+
+
+
+
+
+
+
+
 
 
