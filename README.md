@@ -72,6 +72,37 @@ requestAnimationFrame에 의해 등록되는 자료구조로 requestAnimationFra
 3. 만약 MicroTask Queue가 비었을 경우에는 Animation Frames를 확인하고 마찬가지로 처리해야 할 작업이 있다면 Call Stack에 넣고 처리합니다.
 4. 1~3과정을 거치고 난 후 마지막으로 Callback Queue를 확인하고 마찬가지로 Call Stack에 넣고 처리합니다.
 
+## Sequelize란?
++ ORM(Object-Relational Mapping)은 객체지향 패러다임을 활용하여 관계형 데이터베이스(RDB)의 데이터를 조작하게 하는 기술이다. 이를 활용하면 쿼리를 작성하지 않고도 객체의 메서드를 활용하는 것처럼 쿼리 로직을 작성할 수 있다.
+
++ Sequelize는 MySQL, PostgreSQL, MariaDB 등 많은 RDBMS를 지원하고 Promise 기반으로 구현되었기 때문에 비동기 로직을 편리하게 작성할 수 있다.
+
+### Sequelize사용법
+먼저 Sequelize를 사용하기 위해서 아래 3가지 패키지들을 터미널에서 명령어를 이용해서 설치해준다.
+```
+npm install sequelize // 시퀄라이즈 설치
+npm install mysql2 // mysql2 설치
+npm install -g sequelize-cli // sequelize-cli를 전역으로 설치한다.
+```
+
+위에 3가지 설치가 완료되면, 아래와 같이 터미널에 sequelize init명령어를 사용해서 초기화를 시켜준다.
+```
+sequelize init
+```
+초기화를 시켜주면 config, models, migrations, seeders 와 같은 폴더들이 생긴다.
+
++ config : 데이터베이스 설정 파일, 사용자 이름, DB 이름, 비밀번호 등의 정보 들어있다.
++ migrations : git과 비슷하게, 데이터베이스 변화하는 과정들을 추적해나가는 정보로, 실제 데이터베이스에 반영할 수도 있고 변화를 취소할 수도 있다.
++ models : 데이터베이스 각 테이블의 정보 및 필드타입을 정의하고 하나의 객체로 모은다.
++ seeders : 테이블에 기본 데이터를 넣고 싶은 경우에 사용한다.
++ 데이터베이스 관련 설정 파일인 config.json 이 있다. 여기선 로컬 MySQL을 사용하기로 하고 Student 란 이름의 데이터베이스를 생성해보자. 나의 경우 아이디/비밀번호 모두 root 이다.
+```
+mysql -uroot -p
+create database student;
+use student;
+```
+데이터베이스를 생성하고 선택하자. 이제 이 과정들에 대한 정보들을 config.json 에 적어주면 되는데 development , test , production 이 있기 때문에 모두 수정해준다.
+
 
 
 
